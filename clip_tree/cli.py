@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+Module: cli
+Description: Command-line interface for the clip_tree tool.
+"""
 
 import argparse
 import sys
@@ -10,8 +14,13 @@ from .file_processor import FileProcessor
 from .tree_builder import TreeBuilder
 from .utils import read_files_contents
 
-
 def parse_arguments():
+    """
+    Parses command-line arguments.
+
+    Returns:
+        Namespace: Parsed arguments.
+    """
     parser = argparse.ArgumentParser(
         description="A tool that copies folder and file structures to your clipboard for easy pasting."
     )
@@ -33,14 +42,24 @@ def parse_arguments():
         default="",
         help='Custom instruction to include in the clipboard content.'
     )
+    parser.add_argument(
+        '-e', '--exclude',
+        metavar='PATTERN',
+        type=str,
+        nargs='*',
+        default=[],
+        help='Patterns to manually exclude (in addition to .gitignore patterns).'
+    )
     return parser.parse_args()
 
-
 def main():
+    """
+    The main entry point for the command-line interface.
+    """
     args = parse_arguments()
     base_path = Path.cwd()
 
-    ignore_manager = IgnoreManager(args.paths)
+    ignore_manager = IgnoreManager(args.paths, manual_excludes=args.exclude)
     file_processor = FileProcessor(args.paths, args.recursive, ignore_manager)
 
     files = file_processor.get_all_files()
@@ -73,7 +92,6 @@ def main():
     else:
         print("No content to copy.", file=sys.stderr)
         sys.exit(1)
-
 
 if __name__ == "__main__":
     main()
