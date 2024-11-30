@@ -1,3 +1,7 @@
+"""
+Module: pysetup
+Description: Contains the setup configuration for the clip_tree package.
+"""
 from setuptools import setup, find_packages
 
 with open("README.md", "r", encoding="utf-8") as fh:
@@ -8,8 +12,8 @@ setup(
     version="1.0.0",
     packages=find_packages(),
     install_requires=[
-        "pyperclip",
-        "pathspec"
+        "pyperclip~=1.9.0",
+        "pathspec~=0.12.1"
     ],
     entry_points={
         "console_scripts": [
@@ -19,7 +23,8 @@ setup(
     author="Tobero",
     url="https://github.com/ToberoCat/clip_tree",
     author_email="tobias.madlberger@gmail.com",
-    description="A tool that copies folder and file structures to your clipboard for easy pasting into your ai interface of choice.",
+    description="A tool that copies folder and file structures "
+                "to your clipboard for easy pasting into your ai interface of choice.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     keywords=["clipboard", "directory structure", "CLI", "utility", "chatgpt"],

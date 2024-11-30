@@ -36,12 +36,12 @@ class TreeBuilder:
             path = Path(path_str).resolve()
             if path.is_dir():
                 tree_lines.append(f"{path.name}/")
-                tree_lines.extend(self._build_tree(path, prefix="    "))
+                tree_lines.extend(self.build_tree(path, prefix="    "))
             elif path.is_file():
                 tree_lines.append(f"{path.name}")
         return "\n".join(tree_lines)
 
-    def _build_tree(self, directory: Path, prefix: str = "") -> List[str]:
+    def build_tree(self, directory: Path, prefix: str = "") -> List[str]:
         """
         Recursively builds the tree lines for a directory.
 
@@ -66,7 +66,7 @@ class TreeBuilder:
             if entry.is_dir() and self.recursive:
                 tree.append(f"{prefix}{connector}{entry.name}/")
                 extension = "│   " if index < len(entries) - 1 else "    "
-                tree.extend(self._build_tree(entry, prefix=prefix + extension))
+                tree.extend(self.build_tree(entry, prefix=prefix + extension))
             elif entry.is_file():
                 tree.append(f"{prefix}{connector}{entry.name}")
         return tree

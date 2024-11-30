@@ -1,6 +1,7 @@
 """
 Module: file_processor
-Description: Processes files and directories, applying ignore patterns and collecting files to be processed.
+Description: Processes files and directories,
+applying to ignore patterns and collecting files to be processed.
 """
 
 import sys
@@ -8,10 +9,12 @@ from pathlib import Path
 from typing import List
 from .ignore_manager import IgnoreManager
 
+
 class FileProcessor:
     """
     Processes files and directories to collect a list of files, considering ignore patterns.
     """
+
     def __init__(self, paths: List[str], recursive: bool, ignore_manager: IgnoreManager):
         """
         Initializes the FileProcessor.
@@ -42,12 +45,13 @@ class FileProcessor:
                 if not self.ignore_manager.is_ignored(path):
                     all_files.append(path.resolve())
             elif path.is_dir():
-                all_files.extend(self._process_directory(path))
+                all_files.extend(self.process_directory(path))
             else:
-                print(f"Warning: {path} is neither a file nor a directory and will be skipped.", file=sys.stderr)
+                print(f"Warning: {path} is neither a"
+                      f" file nor a directory and will be skipped.", file=sys.stderr)
         return all_files
 
-    def _process_directory(self, directory: Path) -> List[Path]:
+    def process_directory(self, directory: Path) -> List[Path]:
         """
         Processes a directory to collect files, considering ignore patterns.
 

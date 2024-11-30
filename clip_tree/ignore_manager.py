@@ -1,6 +1,7 @@
 """
 Module: ignore_manager
-Description: Manages ignore patterns for files and directories, including .gitignore files and manual exclusions.
+Description: Manages ignore patterns for files
+and directories, including .gitignore files and manual exclusions.
 """
 
 from pathlib import Path
@@ -9,10 +10,12 @@ import pathspec
 
 DEFAULT_IGNORES = {'.git', '.idea', '__pycache__'}
 
+
 class IgnoreManager:
     """
     Manages ignore patterns for files and directories.
     """
+
     def __init__(self, paths: List[str], manual_excludes: List[str] = None):
         """
         Initializes the IgnoreManager with paths and optional manual exclusions.

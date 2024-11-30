@@ -22,7 +22,8 @@ def parse_arguments():
         Namespace: Parsed arguments.
     """
     parser = argparse.ArgumentParser(
-        description="A tool that copies folder and file structures to your clipboard for easy pasting."
+        description="A tool that copies folder and file structures"
+                    " to your clipboard for easy pasting."
     )
     parser.add_argument(
         'paths',
