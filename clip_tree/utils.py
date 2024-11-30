@@ -9,6 +9,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 def read_files_contents(files: List[Path], base_path: Path) -> str:
     """
     Reads the contents of the given files and formats them with tag names.
@@ -32,5 +33,5 @@ def read_files_contents(files: List[Path], base_path: Path) -> str:
                 file_content = f.read()
                 contents.append(f"<{tag_name}>\n{file_content}\n</{tag_name}>")
         except (IOError, OSError) as e:
-            logger.error("Error reading file %. Error is %", file, e)
+            logger.error("Error reading file %s. Error is %s", file, e)
     return "\n\n".join(contents)
